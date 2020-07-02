@@ -327,6 +327,10 @@ class Client
 		}
 		$user = $users[$context['user']];
 
+        if (!empty($user["token"])) {
+            $options['token'] = $user["token"];
+        }
+
 		$options = [];
 
 		if (!isset($cluster['server'])) {
@@ -349,6 +353,11 @@ class Client
 		}
 
 		$this->setOptions($options, true);
+
+        $this->master .= '/';
+
+        $this->guzzleClient = $this->createGuzzleClient();
+
 	}
 
 	/**
